@@ -1,11 +1,6 @@
 "use client";
 
-import {
-  Email,
-  Lock,
-  Visibility,
-  VisibilityOff
-} from "@mui/icons-material";
+import { Email, Lock, Visibility, VisibilityOff } from "@mui/icons-material";
 import {
   Box,
   Button,
@@ -16,12 +11,12 @@ import {
   TextField,
   Typography,
   useMediaQuery,
-  useTheme
+  useTheme,
 } from "@mui/material";
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { useLoginForm } from "./useLoginForm";
-import MonkeyAnimation from "@/src/components/MonkeyAnimation";
+import { useLoginForm } from "../hooks/useLoginForm";
+import MonkeyAnimation from "@/components/MonkeyAnimation";
 
 export default function LoginForm() {
   const { email, setEmail, showPass, pass, setPass, setShowPass, handleLogin } =
@@ -132,7 +127,7 @@ export default function LoginForm() {
               variant="contained"
               size={isMobile ? "medium" : "small"}
               fullWidth
-              onClick={handleLogin}
+              onClick={() => handleLogin()}
               sx={{
                 py: 1.1,
                 borderRadius: 2,
@@ -146,11 +141,7 @@ export default function LoginForm() {
 
             <Divider sx={{ my: 2 }}>or</Divider>
 
-            <Typography
-              mt={3}
-              textAlign="center"
-              fontSize={isMobile ? 13 : 14}
-            >
+            <Typography mt={3} textAlign="center" fontSize={isMobile ? 13 : 14}>
               Don’t have an account?{" "}
               <span style={{ color: "#3b82f6", cursor: "pointer" }}>
                 Sign Up
