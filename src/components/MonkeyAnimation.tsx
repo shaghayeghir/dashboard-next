@@ -2,9 +2,8 @@
 
 import { memo } from "react";
 import Lottie from "lottie-react";
-
-import idlMonkey from "public/animations/Hear-no.json";
-import sleepMonkey from "public/animations/See-no.json";
+import idlMonkey from "@/assets/animations/Hear-no.json";
+import sleepMonkey from "@/assets/animations/See-no.json";
 
 type PandaAnimationProps = {
   state?: "none" | "email" | "password";
