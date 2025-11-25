@@ -1,9 +1,22 @@
 "use client";
-import { useSelector } from "react-redux";
-import { RootState } from "@/store";
+
+import { useLoginForm } from "@/features/auth/login/hooks/useLoginForm";
+import { Button } from "@mui/material";
 
 export default function DashboardPage() {
-  const user = useSelector((state: RootState) => state.auth.user);
+  const { handleLogout } = useLoginForm();
 
-  return <h2>Welcome {user?.email}</h2>;
+  return (
+    <div>
+      <h2>داشبورد</h2>
+      <Button
+        variant="outlined"
+        onClick={() => {
+          handleLogout();
+        }}
+      >
+        خروج از حساب
+      </Button>
+    </div>
+  );
 }

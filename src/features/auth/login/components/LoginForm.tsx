@@ -1,5 +1,7 @@
 "use client";
 
+import MonkeyAnimation from "@/components/MonkeyAnimation";
+import fa from "@/locales/fa.json";
 import { Email, Lock, Visibility, VisibilityOff } from "@mui/icons-material";
 import {
   Box,
@@ -16,20 +18,16 @@ import {
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { useLoginForm } from "../hooks/useLoginForm";
-import MonkeyAnimation from "@/components/MonkeyAnimation";
 
 export default function LoginForm() {
   const { email, setEmail, showPass, pass, setPass, setShowPass, handleLogin } =
     useLoginForm();
-
-  const [focus, setFocus] = useState<"none" | "email" | "password">("none");
-
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm")); // 👈 موبایل تشخیص میده
+  const [focus, setFocus] = useState<"none" | "email" | "password">("none");
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   return (
     <div>
-      {/* 🔹 انیمیشن با سایز متناسب موبایل */}
       <MonkeyAnimation state={focus} size={isMobile ? 180 : 260} />
 
       <Box
@@ -38,7 +36,7 @@ export default function LoginForm() {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          p: isMobile ? 2 : 4, // 👈 ریسپانسیو
+          p: isMobile ? 2 : 4,
         }}
       >
         <motion.div
@@ -49,31 +47,33 @@ export default function LoginForm() {
           <Paper
             sx={{
               p: isMobile ? 3 : 4,
-              width: isMobile ? "90vw" : 380, // 👈 عرض ریسپانسیو
+              width: isMobile ? "90vw" : 380,
               borderRadius: 4,
             }}
             elevation={4}
           >
             <Typography
-              variant={isMobile ? "h6" : "h5"} // 👈 فونت کوچک‌تر موبایل
+              variant={isMobile ? "h6" : "h5"}
               fontWeight="bold"
               mb={isMobile ? 2 : 3}
             >
-              Log in
+              {fa.auth.login}
             </Typography>
 
             {/* Email */}
+
             <TextField
-              onFocus={() => setFocus("email")}
-              onBlur={() => setFocus("none")}
               fullWidth
-              label="Email Address"
-              type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              sx={{ mb: 2 }}
+              type="email"
               size="small"
+              onFocus={() => setFocus("email")}
+              onBlur={() => setFocus("none")}
+              sx={{ mb: 2 }}
+              placeholder={fa.auth.email}
               InputProps={{
+                sx: { direction: "ltr", textAlign: "left" },
                 startAdornment: (
                   <InputAdornment position="start">
                     <Email />
@@ -81,19 +81,19 @@ export default function LoginForm() {
                 ),
               }}
             />
-
-            {/* Password */}
+            {/* password */}
             <TextField
-              onFocus={() => setFocus("password")}
-              onBlur={() => setFocus("none")}
               fullWidth
-              size="small"
-              label="Password"
-              type={showPass ? "text" : "password"}
               value={pass}
               onChange={(e) => setPass(e.target.value)}
-              sx={{ mb: 1 }}
+              type={showPass ? "text" : "password"}
+              size="small"
+              placeholder={fa.auth.password}
+              onFocus={() => setFocus("password")}
+              onBlur={() => setFocus("none")}
+              sx={{ mb: 2 }}
               InputProps={{
+                sx: { direction: "ltr", textAlign: "left" },
                 startAdornment: (
                   <InputAdornment position="start">
                     <Lock />
@@ -119,7 +119,7 @@ export default function LoginForm() {
                 fontSize: isMobile ? "0.75rem" : "0.85rem",
               }}
             >
-              Forgot password?
+              {fa.auth.forgotPassword}
             </Typography>
 
             {/* Login Button */}
@@ -136,15 +136,15 @@ export default function LoginForm() {
                 mb: 3,
               }}
             >
-              Login
+              {fa.auth.login}
             </Button>
 
-            <Divider sx={{ my: 2 }}>or</Divider>
+            <Divider sx={{ my: 2 }}> {fa.auth.or}</Divider>
 
             <Typography mt={3} textAlign="center" fontSize={isMobile ? 13 : 14}>
-              Don’t have an account?{" "}
+              {fa.auth.signupPrompt}
               <span style={{ color: "#3b82f6", cursor: "pointer" }}>
-                Sign Up
+                {fa.auth.signup}
               </span>
             </Typography>
           </Paper>

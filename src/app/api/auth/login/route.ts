@@ -24,13 +24,24 @@ export async function POST(req: Request) {
 
     // ساخت توکن
     const token = jwt.sign(
-      { userId: user._id, role: user.role },
+      { userId: user._id, role: user.role, email: user.email },
       process.env.JWT_SECRET!,
       { expiresIn: "1h" }
     );
 
+    // برگردوندن اطلاعات کاربر همراه با message
+    const response = NextResponse.json(
+      {
+        message: "Logged in successfully",
+        user: {
+          email: user.email,
+          role: user.role,
+        },
+      },
+      { status: 200 }
+    );
+
     // ست کردن کوکی
-    const response = NextResponse.json({ message: "Logged in successfully" }, { status: 200 });
     response.cookies.set("token", token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",

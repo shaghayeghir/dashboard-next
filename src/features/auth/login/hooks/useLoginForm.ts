@@ -1,9 +1,11 @@
+"use client";
+
+import { setUser } from "@/store/authSlice";
 import { useMutation } from "@tanstack/react-query";
-import { loginService } from "../services/auth.service";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { setUser } from "@/store/authSlice";
 import { useDispatch } from "react-redux";
+import { loginService, logoutService } from "../services/auth.service";
 
 export const useLoginForm = () => {
   const [email, setEmail] = useState("");
@@ -18,12 +20,23 @@ export const useLoginForm = () => {
   } = useMutation({
     mutationFn: () => loginService({ email, password: pass }),
     onSuccess: (data) => {
+      console.log("API RESPONSE:", data);
       dispatch(setUser({ email: data.user.email, role: data.user.role }));
       router.push("/dashboard");
     },
     onError: (err: any) => alert(err.message),
   });
-
+  const {
+    mutate: handleLogout,
+    isPending: isPendingLogout,
+    error: errprLogout,
+  } = useMutation({
+    mutationFn: () => logoutService(),
+    onSuccess: (data) => {
+      router.push("/login");
+    },
+    onError: (err: any) => alert(err.message),
+  });
   return {
     email,
     setEmail,
@@ -34,5 +47,6 @@ export const useLoginForm = () => {
     handleLogin,
     isPending,
     error,
+    handleLogout,
   };
 };
