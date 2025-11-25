@@ -3,10 +3,16 @@
     "login": "ورود",
     "email": "ایمیل",
     "password": "رمز عبور",
+    "confirmPassword": "تکرار رمز عبور",
     "forgotPassword": "آیا رمز عبور را فراموش کرده‌اید؟",
     "submit": "ورود",
     "or": "یا",
-    "signupPrompt": "هنوز ثبت نام نکردید؟",
-    "signup": "ثبت نام"
+    "signupPrompt": "هنوز ثبت نام نکرده‌اید؟",
+    "signup": "ثبت نام",
+    "registerTitle": "ایجاد حساب کاربری",
+    "alreadyRegistered": "قبلاً ثبت‌نام کرده‌اید؟",
+    "acceptTerms": "با قوانین و شرایط موافقم",
+    "signupButton": "ثبت‌نام",
+    "loginInstead": "ورود به حساب"
   }
 }

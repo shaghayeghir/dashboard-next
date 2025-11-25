@@ -18,7 +18,8 @@ export const useLoginForm = () => {
     isPending,
     error,
   } = useMutation({
-    mutationFn: () => loginService({ email, password: pass }),
+    mutationFn: (data: { email: string; password: string }) =>
+      loginService(data), // 👈 اینجا data ارسال بشه
     onSuccess: (data) => {
       console.log("API RESPONSE:", data);
       dispatch(setUser({ email: data.user.email, role: data.user.role }));

@@ -3,44 +3,45 @@
 import MonkeyAnimation from "@/components/MonkeyAnimation";
 import fa from "@/locales/fa.json";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Email, Lock, Visibility, VisibilityOff } from "@mui/icons-material";
+import { Email, Lock, LockOpen } from "@mui/icons-material";
 import {
-  Box,
-  Button,
-  IconButton,
-  InputAdornment,
-  Paper,
-  TextField,
-  Typography,
-  useMediaQuery,
-  useTheme,
+    Box,
+    Button,
+    Checkbox,
+    Divider,
+    FormControlLabel,
+    IconButton,
+    InputAdornment,
+    Paper,
+    TextField,
+    Typography,
+    useMediaQuery,
+    useTheme,
 } from "@mui/material";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useLoginForm } from "../hooks/useLoginForm";
-import { loginSchema } from "../validation/loginSchema";
+import { useRegisterForm } from "../hooks/useRegisterForm";
+import { registerSchema } from "../validation/registerSchema";
 
-export default function LoginForm() {
-  const { handleLogin } = useLoginForm();
+export default function RegisterForm() {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const [showPass, setShowPass] = useState(false);
+  const [focus, setFocus] = useState<"none" | "email" | "password">("none");
+
+  const { handleRegister } = useRegisterForm();
 
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(loginSchema),
+    resolver: yupResolver(registerSchema),
     mode: "onChange",
   });
 
-  const onSubmit = (data: { email: string; password: string }) => {
-    handleLogin(data); // 🔥 مقدار فرم مستقیم ارسال می‌شه
-  };
-
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-  const [showPass, setShowPass] = useState(false);
-  const [focus, setFocus] = useState<"none" | "email" | "password">("none");
+  const onSubmit = (data: any) => handleRegister(data);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -67,22 +68,21 @@ export default function LoginForm() {
               fontWeight="bold"
               mb={2}
             >
-              {fa.auth.login}
+              {fa.auth.signup}
             </Typography>
 
-            {/* ایمیل */}
+            {/* Email */}
             <TextField
               {...register("email")}
               fullWidth
               size="small"
+              placeholder={fa.auth.email}
               error={!!errors.email}
               helperText={errors.email?.message}
-              placeholder={fa.auth.email}
               onFocus={() => setFocus("email")}
-              onBlur={() => setFocus("none")}
               sx={{ mb: 2 }}
               InputProps={{
-                sx: { direction: "ltr", textAlign: "left" },
+                sx: { direction: "ltr" },
                 startAdornment: (
                   <InputAdornment position="start">
                     <Email />
@@ -91,20 +91,19 @@ export default function LoginForm() {
               }}
             />
 
-            {/* رمز عبور */}
+            {/* Password */}
             <TextField
               {...register("password")}
               fullWidth
               size="small"
               type={showPass ? "text" : "password"}
+              placeholder={fa.auth.password}
               error={!!errors.password}
               helperText={errors.password?.message}
-              placeholder={fa.auth.password}
               onFocus={() => setFocus("password")}
-              onBlur={() => setFocus("none")}
               sx={{ mb: 2 }}
               InputProps={{
-                sx: { direction: "ltr", textAlign: "left" },
+                sx: { direction: "ltr" },
                 startAdornment: (
                   <InputAdornment position="start">
                     <Lock />
@@ -113,29 +112,56 @@ export default function LoginForm() {
                 endAdornment: (
                   <InputAdornment position="end">
                     <IconButton onClick={() => setShowPass(!showPass)}>
-                      {showPass ? <VisibilityOff /> : <Visibility />}
+                      {showPass ? <LockOpen /> : <Lock />}
                     </IconButton>
                   </InputAdornment>
                 ),
               }}
             />
 
-            <Typography
-              variant="body2"
-              color="primary"
-              sx={{ cursor: "pointer", mb: 3, textAlign: "right" }}
-            >
-              {fa.auth.forgotPassword}
-            </Typography>
-
-            <Button
-              type="submit"
-              variant="contained"
+            {/* Confirm Password */}
+            <TextField
+              {...register("confirmPassword")}
               fullWidth
-              sx={{ py: 1.1, borderRadius: 2, textTransform: "none", mb: 3 }}
-            >
-              {fa.auth.login}
+              size="small"
+              type={showPass ? "text" : "password"}
+              placeholder={fa.auth.confirmPassword}
+              error={!!errors.confirmPassword}
+              helperText={errors.confirmPassword?.message}
+              onFocus={() => setFocus("none")}
+              sx={{ mb: 2 }}
+              InputProps={{
+                sx: { direction: "ltr" },
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <Lock />
+                  </InputAdornment>
+                ),
+              }}
+            />
+
+            {/* Terms */}
+            <FormControlLabel
+              control={<Checkbox />}
+              label={fa.auth.acceptTerms}
+              sx={{ fontSize: "0.8rem", mb: 1 }}
+            />
+
+            <Button variant="contained" type="submit" fullWidth sx={{ mt: 1 }}>
+              {fa.auth.signup}
             </Button>
+
+            <Divider sx={{ my: 2 }}>{fa.auth.or}</Divider>
+
+            <Typography
+              textAlign="center"
+              fontSize={isMobile ? "0.8rem" : "0.9rem"}
+            >
+              {fa.auth.alreadyRegistered}
+              <span style={{ cursor: "pointer", color: "#3b82f6" }}>
+                {fa.auth.login}
+              </span>
+            </Typography>
           </Paper>
         </motion.div>
       </Box>
