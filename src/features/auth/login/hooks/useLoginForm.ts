@@ -22,7 +22,7 @@ export const useLoginForm = () => {
       loginService(data), // 👈 اینجا data ارسال بشه
     onSuccess: (data) => {
       console.log("API RESPONSE:", data);
-      dispatch(setUser({ email: data.user.email, role: data.user.role }));
+      dispatch(setUser({ email: data.user.email, role: data.user.role ,  createdAt: data.user.createdAt}));
       router.push("/dashboard");
     },
     onError: (err: any) => alert(err.message),

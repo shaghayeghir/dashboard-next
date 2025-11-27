@@ -5,20 +5,21 @@ import fa from "@/locales/fa.json";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Email, Lock, LockOpen } from "@mui/icons-material";
 import {
-    Box,
-    Button,
-    Checkbox,
-    Divider,
-    FormControlLabel,
-    IconButton,
-    InputAdornment,
-    Paper,
-    TextField,
-    Typography,
-    useMediaQuery,
-    useTheme,
+  Box,
+  Button,
+  Checkbox,
+  Divider,
+  FormControlLabel,
+  IconButton,
+  InputAdornment,
+  Paper,
+  TextField,
+  Typography,
+  useMediaQuery,
+  useTheme,
 } from "@mui/material";
 import { motion } from "framer-motion";
+import Link from "next/link";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useRegisterForm } from "../hooks/useRegisterForm";
@@ -85,7 +86,9 @@ export default function RegisterForm() {
                 sx: { direction: "ltr" },
                 startAdornment: (
                   <InputAdornment position="start">
-                    <Email />
+                    <IconButton>
+                      <Email />
+                    </IconButton>
                   </InputAdornment>
                 ),
               }}
@@ -106,11 +109,6 @@ export default function RegisterForm() {
                 sx: { direction: "ltr" },
                 startAdornment: (
                   <InputAdornment position="start">
-                    <Lock />
-                  </InputAdornment>
-                ),
-                endAdornment: (
-                  <InputAdornment position="end">
                     <IconButton onClick={() => setShowPass(!showPass)}>
                       {showPass ? <LockOpen /> : <Lock />}
                     </IconButton>
@@ -153,14 +151,21 @@ export default function RegisterForm() {
 
             <Divider sx={{ my: 2 }}>{fa.auth.or}</Divider>
 
-            <Typography
-              textAlign="center"
-              fontSize={isMobile ? "0.8rem" : "0.9rem"}
-            >
-              {fa.auth.alreadyRegistered}
-              <span style={{ cursor: "pointer", color: "#3b82f6" }}>
-                {fa.auth.login}
-              </span>
+            <Typography textAlign="center" fontSize={isMobile ? 13 : 14}>
+              {fa.auth.alreadyRegistered}{" "}
+              <Link href="/login" passHref>
+                <Typography
+                  component="span"
+                  sx={{
+                    color: "#3b82f6",
+                    cursor: "pointer",
+                    fontWeight: "bold",
+                    "&:hover": { opacity: 0.8 },
+                  }}
+                >
+                  {fa.auth.login}
+                </Typography>
+              </Link>
             </Typography>
           </Paper>
         </motion.div>

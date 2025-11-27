@@ -19,7 +19,10 @@ export async function POST(req: Request) {
     // چک رمز
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      return NextResponse.json({ message: "Incorrect password" }, { status: 400 });
+      return NextResponse.json(
+        { message: "Incorrect password" },
+        { status: 400 }
+      );
     }
 
     // ساخت توکن
@@ -36,6 +39,7 @@ export async function POST(req: Request) {
         user: {
           email: user.email,
           role: user.role,
+          createdAt: user.createdAt,
         },
       },
       { status: 200 }
