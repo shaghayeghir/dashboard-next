@@ -1,7 +1,8 @@
 "use client";
 
-import { Box, Typography, CircularProgress } from "@mui/material";
+import { Box, Typography, CircularProgress, Divider } from "@mui/material";
 import { usePostDetails } from "../hooks/usePostDetails";
+import Card from "@/components/UI/Card";
 
 export default function PostDetailsPage({ postId }: { postId: string }) {
   const { data, isLoading, error } = usePostDetails(postId);
@@ -11,10 +12,20 @@ export default function PostDetailsPage({ postId }: { postId: string }) {
 
   return (
     <Box>
-      <Typography variant="h5" fontWeight="bold" mb={2}>
+<Card>
+        <Typography
+        variant="h5"
+        fontWeight="bold"
+        mb={2}
+        sx={{ color: "text.primary" }}
+      >
         {data.title}
       </Typography>
-      <Typography variant="body1">{data.body}</Typography>
+<Divider className="py-3"/>
+      <Typography variant="body1" sx={{ color: "text.secondary" }} className="py-3">
+        {data.body}
+      </Typography>
+</Card>
     </Box>
   );
 }

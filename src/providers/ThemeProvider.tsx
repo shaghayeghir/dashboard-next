@@ -1,14 +1,22 @@
 "use client";
 
-import { ThemeProvider as MuiThemeProvider, createTheme } from "@mui/material/styles";
-import { CacheProvider } from "@emotion/react";
 import createCache from "@emotion/cache";
+import { CacheProvider } from "@emotion/react";
+import CssBaseline from "@mui/material/CssBaseline";
+import {
+  ThemeProvider as MuiThemeProvider,
+  createTheme,
+} from "@mui/material/styles";
+import { useTheme as useNextTheme } from "next-themes";
+import { useMemo } from "react";
 import { prefixer } from "stylis";
 import rtlPlugin from "stylis-plugin-rtl";
-import { useMemo } from "react";
-import { useTheme as useNextTheme } from "next-themes";
 
-export default function MUIThemeProvider({ children }: { children: React.ReactNode }) {
+export default function MUIThemeProvider({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   // ایجاد RTL استایل
   const cacheRtl = createCache({
     key: "mui-rtl",
@@ -16,8 +24,7 @@ export default function MUIThemeProvider({ children }: { children: React.ReactNo
   });
 
   // دریافت حالت نهایی تم از next-themes
-  const { resolvedTheme } = useNextTheme(); 
-
+  const { resolvedTheme } = useNextTheme();
 
   const muiTheme = useMemo(
     () =>
@@ -43,11 +50,12 @@ export default function MUIThemeProvider({ children }: { children: React.ReactNo
           borderRadius: 12,
         },
       }),
-    [resolvedTheme] 
+    [resolvedTheme]
   );
 
   return (
     <CacheProvider value={cacheRtl}>
+      <CssBaseline />
       <MuiThemeProvider theme={muiTheme}>{children}</MuiThemeProvider>
     </CacheProvider>
   );

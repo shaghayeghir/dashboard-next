@@ -1,22 +1,20 @@
 "use client";
 
 import Card from "@/components/UI/Card";
+import PostsPage from "@/features/posts/components/PostsPage";
 import { RootState } from "@/store";
 import {
   Avatar,
   Box,
   CardContent,
   Chip,
-  CircularProgress,
   Grid,
-  Typography,
+  Typography
 } from "@mui/material";
 import { motion } from "framer-motion";
 import { useTheme } from "next-themes";
-import Link from "next/link";
 import { useSelector } from "react-redux";
 import { useDashboard } from "../hooks/useDashboard";
-import PostsPage from "@/features/posts/components/PostsPage";
 
 export default function DashboardPage() {
   const { user } = useSelector((state: RootState) => state.auth);

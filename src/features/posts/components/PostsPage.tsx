@@ -15,9 +15,6 @@ export default function PostsPage() {
 
   return (
     <Box>
-      <Typography variant="h5" fontWeight="bold" mb={3}>
-        لیست پست‌ها
-      </Typography>
 
       <Grid container spacing={2}>
         {data.map((post: any) => (

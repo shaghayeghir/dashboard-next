@@ -1,22 +1,21 @@
 "use client";
 
+import { useLoginForm } from "@/features/auth/login/hooks/useLoginForm";
+import { RootState } from "@/store";
+import DarkModeIcon from "@mui/icons-material/DarkMode";
+import LogoutIcon from "@mui/icons-material/Logout";
+import WbSunnyIcon from "@mui/icons-material/WbSunny";
 import {
   Box,
+  Button,
+  CircularProgress,
   IconButton,
   Typography,
-  CircularProgress,
-  Button,
   useTheme,
 } from "@mui/material";
-import DarkModeIcon from "@mui/icons-material/DarkMode";
-import WbSunnyIcon from "@mui/icons-material/WbSunny";
-import LogoutIcon from "@mui/icons-material/Logout";
-import RefreshIcon from "@mui/icons-material/Refresh";
-import { useSelector } from "react-redux";
-import { RootState } from "@/store";
-import { useLoginForm } from "@/features/auth/login/hooks/useLoginForm";
 import { useQueryClient } from "@tanstack/react-query";
 import { useTheme as useNextThemes } from "next-themes";
+import { useSelector } from "react-redux";
 
 export default function DashboardHeader() {
   const muiTheme = useTheme();
@@ -41,12 +40,14 @@ export default function DashboardHeader() {
       <Typography variant="h6">سلام، {user?.email} 👋</Typography>
 
       <Box display="flex" alignItems="center" gap={2}>
-        <IconButton onClick={() => queryClient.invalidateQueries()}>
-          <RefreshIcon />
-        </IconButton>
-
-        <IconButton onClick={() => setTheme(theme === "light" ? "dark" : "light")}>
-          {muiTheme.palette.mode === "dark" ? <WbSunnyIcon /> : <DarkModeIcon />}
+        <IconButton
+          onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+        >
+          {muiTheme.palette.mode === "dark" ? (
+            <WbSunnyIcon />
+          ) : (
+            <DarkModeIcon />
+          )}
         </IconButton>
 
         <Button
