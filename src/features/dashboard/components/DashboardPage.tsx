@@ -1,5 +1,7 @@
 "use client";
 
+import Card from "@/components/UI/Card";
+import { RootState } from "@/store";
 import {
   Avatar,
   Box,
@@ -10,11 +12,11 @@ import {
   Typography,
 } from "@mui/material";
 import { motion } from "framer-motion";
-import { useSelector } from "react-redux";
-import { RootState } from "@/store";
-import { useDashboard } from "../hooks/useDashboard";
-import Card from "@/components/UI/Card";
 import { useTheme } from "next-themes";
+import Link from "next/link";
+import { useSelector } from "react-redux";
+import { useDashboard } from "../hooks/useDashboard";
+import PostsPage from "@/features/posts/components/PostsPage";
 
 export default function DashboardPage() {
   const { user } = useSelector((state: RootState) => state.auth);
@@ -125,50 +127,7 @@ export default function DashboardPage() {
           </Grid>
         ))}
       </Grid>
-
-      {/* === Latest Posts === */}
-      <Card title="آخرین پست‌ها">
-        {isLoading ? (
-          <Box textAlign="center" py={2}>
-            <CircularProgress />
-          </Box>
-        ) : error ? (
-          <Typography color="error">خطا در دریافت اطلاعات.</Typography>
-        ) : (
-          <Grid container spacing={2}>
-            {data.slice(0, 5).map((post: any) => (
-              <Grid key={post.id} size={{ xs: 12, md: 4, sm: 6 }}>
-                <motion.div whileHover={{ scale: 1.02 }} transition={{ duration: 0.2 }}>
-                  <Card
-                    onClick={() => console.log(post.id)}
-                    sx={{
-                      borderRadius: 3,
-                      transition: "all .25s ease",
-                      cursor: "pointer",
-                    }}
-                  >
-                    <Typography fontWeight="bold" noWrap>
-                      {post.title}
-                    </Typography>
-                    <Typography
-                      variant="body2"
-                      color="text.secondary"
-                      sx={{
-                        display: "-webkit-box",
-                        WebkitLineClamp: 3,
-                        WebkitBoxOrient: "vertical",
-                        overflow: "hidden",
-                      }}
-                    >
-                      {post.body}
-                    </Typography>
-                  </Card>
-                </motion.div>
-              </Grid>
-            ))}
-          </Grid>
-        )}
-      </Card>
+      <PostsPage />
     </Box>
   );
 }

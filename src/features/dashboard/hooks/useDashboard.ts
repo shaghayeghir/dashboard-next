@@ -3,10 +3,11 @@
 import { useQuery } from "@tanstack/react-query";
 import { DashboardService } from "../services/dashboard.service";
 
-export const useDashboard = () => {
+export const useDashboard = (page = 1, limit = 6) => {
   const { data, isLoading, error } = useQuery({
-    queryKey: ["posts"],
-    queryFn: DashboardService,
+    queryKey: ["posts", page], // 👈 page تو queryKey مهمه
+    queryFn: () => DashboardService(page, limit), // 👈 ارسال page و limit
+    placeholderData: (oldData) => oldData,
   });
 
   return {

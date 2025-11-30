@@ -1,19 +1,13 @@
+export const DashboardService = async (page: number, limit: number) => {
+  const res = await fetch(
+    `https://jsonplaceholder.typicode.com/posts?_page=${page}&_limit=${limit}`,
+    {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    }
+  );
 
-export interface LoginPayload {
-  email: string;
-  password: string;
-}
-
-export const DashboardService = async () => {
-  const res = await fetch("https://jsonplaceholder.typicode.com/posts", {
-    method: "Get",
-    headers: { "Content-Type": "application/json" },
-  });
-
-  if (!res.ok) {
-    const data = await res.json();
-    throw new Error(data.message || "Login failed");
-  }
+  if (!res.ok) throw new Error("خطا در دریافت داده‌ها");
 
   return res.json();
 };
