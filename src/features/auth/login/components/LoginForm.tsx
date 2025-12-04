@@ -22,8 +22,8 @@ import { useLoginForm } from "../hooks/useLoginForm";
 import { loginSchema } from "../validation/loginSchema";
 
 export default function LoginForm() {
-  const { handleLogin } = useLoginForm();
 
+  const { handleLogin } = useLoginForm();
   const {
     register,
     handleSubmit,

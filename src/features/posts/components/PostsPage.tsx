@@ -1,25 +1,34 @@
 "use client";
 
-import { Box, Typography, CircularProgress, Grid, Pagination } from "@mui/material";
-import { useState } from "react";
-import { useDashboard } from "@/features/dashboard/hooks/useDashboard";
 import Card from "@/components/UI/Card";
+import { useDashboard } from "@/features/dashboard/hooks/useDashboard";
+import fa from "@/locales/fa.json";
+import {
+  Box,
+  CircularProgress,
+  Grid,
+  Pagination,
+  Typography,
+} from "@mui/material";
 import Link from "next/link";
-
+import { useState } from "react";
 export default function PostsPage() {
   const [page, setPage] = useState(1);
   const { data = [], isLoading, error } = useDashboard(page, 6); // 6 آیتم در هر صفحه
 
   if (isLoading) return <CircularProgress />;
-  if (error) return <Typography color="error">خطا در دریافت اطلاعات</Typography>;
+  if (error)
+    return <Typography color="error"> {fa.post.errorInGetInfo} </Typography>;
 
   return (
     <Box>
-
       <Grid container spacing={2}>
         {data.map((post: any) => (
           <Grid key={post.id} size={{ xs: 12, md: 4, sm: 6 }}>
-            <Link href={`/dashboard/posts/${post.id}`} style={{ textDecoration: "none" }}>
+            <Link
+              href={`/dashboard/posts/${post.id}`}
+              style={{ textDecoration: "none" }}
+            >
               <Card>
                 <Typography fontWeight="bold" noWrap>
                   {post.title}

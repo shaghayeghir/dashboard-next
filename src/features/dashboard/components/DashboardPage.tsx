@@ -9,13 +9,13 @@ import {
   CardContent,
   Chip,
   Grid,
-  Typography
+  Typography,
 } from "@mui/material";
 import { motion } from "framer-motion";
 import { useTheme } from "next-themes";
 import { useSelector } from "react-redux";
 import { useDashboard } from "../hooks/useDashboard";
-
+import fa from "@/locales/fa.json";
 export default function DashboardPage() {
   const { user } = useSelector((state: RootState) => state.auth);
   const { data = [], error, isLoading } = useDashboard();
@@ -74,7 +74,11 @@ export default function DashboardPage() {
                 {user?.email}
               </Typography>
               <Chip
-                label={user?.role === "ADMIN" ? "مدیر سیستم" : "کاربر عادی"}
+                label={
+                  user?.role === "ADMIN"
+                    ? fa.dashboardPage.admin
+                    : fa.dashboardPage.user
+                }
                 sx={{
                   mt: 1,
                   color: "white",
@@ -91,9 +95,15 @@ export default function DashboardPage() {
       {/* === Summary Cards === */}
       <Grid container spacing={2} mb={4}>
         {[
-          { title: "کل پست‌ها", value: data.length },
-          { title: "نمایش در داشبورد", value: Math.min(data.length, 5) },
-          { title: "وضعیت API", value: error ? "خطا" : "متصل" },
+          { title: fa.dashboardPage.totalPosts, value: data.length },
+          {
+            title: fa.dashboardPage.displayInDashboard,
+            value: Math.min(data.length, 5),
+          },
+          {
+            title: fa.dashboardPage.apiStatus,
+            value: error ? fa.dashboardPage.error : fa.dashboardPage.connect,
+          },
         ].map((item, i) => (
           <Grid key={i} size={{ xs: 12, md: 4, sm: 6 }}>
             <motion.div

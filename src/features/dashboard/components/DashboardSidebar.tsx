@@ -16,12 +16,28 @@ import {
 } from "@mui/material";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-
+import fa from "@/locales/fa.json";
 const menuItems = [
-  { text: "داشبورد", icon: <DashboardIcon />, href: "/dashboard" },
-  { text: "پست‌ها", icon: <ArticleIcon />, href: "/dashboard/posts" },
-  { text: "تنظیمات", icon: <SettingsIcon />, href: "/dashboard/settings" },
-  { text: "فرم کارکنان", icon: <VerifiedUser />, href: "/dashboard/userForm" },
+  {
+    text: fa.dashboardSideBar.dashboard,
+    icon: <DashboardIcon />,
+    href: "/dashboard",
+  },
+  {
+    text: fa.dashboardSideBar.posts,
+    icon: <ArticleIcon />,
+    href: "/dashboard/posts",
+  },
+  {
+    text: fa.dashboardSideBar.setting,
+    icon: <SettingsIcon />,
+    href: "/dashboard/settings",
+  },
+  {
+    text: fa.dashboardSideBar.userForm,
+    icon: <VerifiedUser />,
+    href: "/dashboard/userForm",
+  },
 ];
 
 export default function DashboardSidebar() {
@@ -51,7 +67,7 @@ export default function DashboardSidebar() {
       }}
     >
       <Typography variant="h6" fontWeight="bold" textAlign="center" py={2}>
-        🎛 ACME Panel
+        {fa.dashboardSideBar.acmePanel}
       </Typography>
 
       <Divider

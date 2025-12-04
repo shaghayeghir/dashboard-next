@@ -1,6 +1,7 @@
 "use client";
 
 import { useLoginForm } from "@/features/auth/login/hooks/useLoginForm";
+import fa from "@/locales/fa.json";
 import { RootState } from "@/store";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import LogoutIcon from "@mui/icons-material/Logout";
@@ -13,16 +14,13 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
-import { useQueryClient } from "@tanstack/react-query";
 import { useTheme as useNextThemes } from "next-themes";
 import { useSelector } from "react-redux";
-
 export default function DashboardHeader() {
   const muiTheme = useTheme();
   const { theme, setTheme } = useNextThemes();
   const { user } = useSelector((state: RootState) => state.auth);
   const { handleLogout, isPending } = useLoginForm();
-  const queryClient = useQueryClient();
 
   return (
     <Box
@@ -37,7 +35,9 @@ export default function DashboardHeader() {
         borderBottom: "1px solid rgba(0,0,0,0.1)",
       }}
     >
-      <Typography variant="h6">سلام، {user?.email} 👋</Typography>
+      <Typography variant="h6">
+        {fa.dashboardHeader.hi} {user?.email} 👋
+      </Typography>
 
       <Box display="flex" alignItems="center" gap={2}>
         <IconButton
@@ -57,7 +57,7 @@ export default function DashboardHeader() {
           onClick={() => handleLogout()}
           disabled={isPending}
         >
-          {isPending ? <CircularProgress size={20} /> : "خروج"}
+          {isPending ? <CircularProgress size={20} /> : fa.dashboardHeader.exit}
         </Button>
       </Box>
     </Box>

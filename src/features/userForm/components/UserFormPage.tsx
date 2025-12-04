@@ -8,16 +8,27 @@ import { ArrowMarker } from "./progress/ArrowMarker";
 import { Character } from "./progress/Character";
 import { ProgressIndicator } from "./progress/ProgressIndicator";
 import { ProgressPath } from "./progress/ProgressPath";
+import fa from "@/locales/fa.json";
 
 export default function FormProgressCharacter() {
   const { cx, cy, setStep, step, svgRef, pathRef } = useCharacterMovement();
 
   // Form fields configuration
   const formFields: FormField[] = [
-    { id: 1, type: "text", placeholder: "نام", visible: step >= 0 },
-    { id: 2, type: "email", placeholder: "ایمیل", visible: step >= 1 },
-    { id: 3, type: "text", placeholder: "شماره تماس", visible: step >= 2 },
-    { id: 4, type: "textarea", placeholder: "توضیحات", visible: step >= 3 },
+    { id: 1, type: "text", placeholder: fa.userForm.name, visible: step >= 0 },
+    {
+      id: 2,
+      type: "email",
+      placeholder: fa.userForm.email,
+      visible: step >= 1,
+    },
+    { id: 3, type: "text", placeholder: fa.userForm.email, visible: step >= 2 },
+    {
+      id: 4,
+      type: "textarea",
+      placeholder: fa.userForm.comment,
+      visible: step >= 3,
+    },
   ];
 
   const handleStepChange = (newStep: number) => {
@@ -59,7 +70,7 @@ export default function FormProgressCharacter() {
             <div className="mt-4 pt-4 border-t border-gray-200">
               <div className="flex justify-between items-center">
                 <span className="text-sm text-gray-600">
-                  مرحله {step } از {TOTAL_STEPS }
+                  {fa.userForm.step} {step} {fa.userForm.from} {TOTAL_STEPS}
                 </span>
                 <button
                   type="button"
@@ -67,7 +78,7 @@ export default function FormProgressCharacter() {
                   className="text-sm text-blue-600 hover:text-blue-800 disabled:text-gray-400"
                   disabled={step === 0}
                 >
-                  مرحله قبلی
+                  {fa.userForm.previousStep}
                 </button>
               </div>
             </div>
