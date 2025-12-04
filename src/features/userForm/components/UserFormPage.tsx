@@ -59,7 +59,7 @@ export default function FormProgressCharacter() {
             <div className="mt-4 pt-4 border-t border-gray-200">
               <div className="flex justify-between items-center">
                 <span className="text-sm text-gray-600">
-                  مرحله {step + 1} از {TOTAL_STEPS + 1}
+                  مرحله {step } از {TOTAL_STEPS }
                 </span>
                 <button
                   type="button"
