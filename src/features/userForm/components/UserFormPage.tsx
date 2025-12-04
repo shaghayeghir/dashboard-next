@@ -1,10 +1,9 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
-import { motion, useMotionValue, useTransform, animate } from "framer-motion";
+import { animate, motion, useMotionValue } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 
-const PATH_D =
-  "M10 200 C 150 150, 150 50, 300 80 S 450 180, 600 70";
+const PATH_D = "M10 100 C 150 150, 150 50, 300 80 S 450 180, 600 70";
 
 export default function FormProgressCharacter() {
   const [step, setStep] = useState(0);
@@ -47,24 +46,41 @@ export default function FormProgressCharacter() {
 
   return (
     <div className="w-full flex flex-col items-center p-10 gap-10">
-
-      <svg ref={svgRef} width="650" height="250">
+      <svg ref={svgRef} width="650" height="250" >
+        
+  <defs>
+    <marker
+      id="arrow"
+      markerWidth="10"
+      markerHeight="10"
+      refX="5"
+      refY="5"
+      orient="auto"
+      markerUnits="strokeWidth"
+    >
+      <path d="M0,0 L10,5 L0,10 z" fill="#999" />
+    </marker>
+  </defs>
         <path
-          ref={pathRef}
-          d={PATH_D}
-          fill="none"
-          stroke="#bbb"
-          strokeWidth="3"
-        />
+  ref={pathRef}
+  d={PATH_D}
+  fill="none"
+  stroke="#bbb"
+  strokeWidth="3"
+  markerEnd="url(#arrow)"
+/>
 
-        <motion.circle
-          r="12"
-          fill="#ff5733"
-          style={{
-            cx,
-            cy,
-          }}
-        />
+        <motion.g style={{ translateX: cx, translateY: cy }}>
+          <text
+            x={0}
+            y={0}
+            fontSize="34"
+            textAnchor="middle"
+            dominantBaseline="middle"
+          >
+            🧍‍♂️
+          </text>
+        </motion.g>
       </svg>
 
       {/* فرم */}
