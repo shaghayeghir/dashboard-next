@@ -1,124 +1,78 @@
 "use client";
 
-import { animate, motion, useMotionValue } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
-
-const PATH_D = "M10 100 C 150 150, 150 50, 300 80 S 450 180, 600 70";
+import { TOTAL_STEPS } from "../constants/path";
+import { useCharacterMovement } from "../hooks/useCharacterMovement";
+import { FormField } from "../types/formField";
+import { FormFieldComponent } from "./fileds/FormFieldComponent";
+import { ArrowMarker } from "./progress/ArrowMarker";
+import { Character } from "./progress/Character";
+import { ProgressIndicator } from "./progress/ProgressIndicator";
+import { ProgressPath } from "./progress/ProgressPath";
 
 export default function FormProgressCharacter() {
-  const [step, setStep] = useState(0);
-  const totalSteps = 4;
+  const { cx, cy, setStep, step, svgRef, pathRef } = useCharacterMovement();
 
-  const progress = useMotionValue(0);
+  // Form fields configuration
+  const formFields: FormField[] = [
+    { id: 1, type: "text", placeholder: "نام", visible: step >= 0 },
+    { id: 2, type: "email", placeholder: "ایمیل", visible: step >= 1 },
+    { id: 3, type: "text", placeholder: "شماره تماس", visible: step >= 2 },
+    { id: 4, type: "textarea", placeholder: "توضیحات", visible: step >= 3 },
+  ];
 
-  const svgRef = useRef<SVGSVGElement>(null);
-  const pathRef = useRef<SVGPathElement>(null);
-
-  const cx = useMotionValue(0);
-  const cy = useMotionValue(0);
-
-  // حرکت کاراکتر روی مسیر
-  useEffect(() => {
-    const updatePosition = () => {
-      if (!pathRef.current) return;
-
-      const length = pathRef.current.getTotalLength();
-      const point = pathRef.current.getPointAtLength(progress.get() * length);
-
-      cx.set(point.x);
-      cy.set(point.y);
-    };
-
-    const unsub = progress.on("change", updatePosition);
-    updatePosition();
-
-    return () => unsub();
-  }, [progress]);
-
-  // انیمیشن همزمان با فرم
-  useEffect(() => {
-    const target = step / totalSteps;
-    animate(progress, target, {
-      duration: 0.8,
-      ease: "easeInOut",
-    });
-  }, [step]);
+  const handleStepChange = (newStep: number) => {
+    setStep(Math.min(newStep, TOTAL_STEPS));
+  };
 
   return (
-    <div className="w-full flex flex-col items-center p-10 gap-10">
-      <svg ref={svgRef} width="650" height="250" >
-        
-  <defs>
-    <marker
-      id="arrow"
-      markerWidth="10"
-      markerHeight="10"
-      refX="5"
-      refY="5"
-      orient="auto"
-      markerUnits="strokeWidth"
-    >
-      <path d="M0,0 L10,5 L0,10 z" fill="#999" />
-    </marker>
-  </defs>
-        <path
-  ref={pathRef}
-  d={PATH_D}
-  fill="none"
-  stroke="#bbb"
-  strokeWidth="3"
-  markerEnd="url(#arrow)"
-/>
-
-        <motion.g style={{ translateX: cx, translateY: cy }}>
-          <text
-            x={0}
-            y={0}
-            fontSize="34"
-            textAnchor="middle"
-            dominantBaseline="middle"
+    <div className="min-h-screen flex flex-col items-center justify-center p-4 bg-gradient-to-br from-gray-50 to-gray-100">
+      <div className="w-full max-w-3xl flex flex-col items-center gap-12">
+        {/* SVG Section */}
+        <div className="relative w-full">
+          <svg
+            ref={svgRef}
+            width="100%"
+            height="80"
+            viewBox="0 0 650 130"
+            className="overflow-visible"
           >
-            🧍‍♂️
-          </text>
-        </motion.g>
-      </svg>
+            <ArrowMarker />
+            <ProgressPath pathRef={pathRef} />
+            <Character cx={cx} cy={cy} />
+          </svg>
+        </div>
 
-      {/* فرم */}
-      <div className="w-80 flex flex-col gap-4 p-4 rounded-xl shadow bg-white">
-        {step >= 0 && (
-          <input
-            type="text"
-            className="border p-2 rounded"
-            placeholder="نام"
-            onChange={() => setStep(1)}
-          />
-        )}
+        {/* Form Section */}
+        <div className="w-full max-w-md">
+          <ProgressIndicator currentStep={step} totalSteps={TOTAL_STEPS} />
 
-        {step >= 1 && (
-          <input
-            type="email"
-            className="border p-2 rounded"
-            placeholder="ایمیل"
-            onChange={() => setStep(2)}
-          />
-        )}
+          <div className="flex flex-col gap-4 p-6 rounded-xl shadow-lg bg-white">
+            {formFields.map((field) => (
+              <FormFieldComponent
+                key={field.id}
+                field={field}
+                onStepChange={handleStepChange}
+              />
+            ))}
 
-        {step >= 2 && (
-          <input
-            type="text"
-            className="border p-2 rounded"
-            placeholder="شماره تماس"
-            onChange={() => setStep(3)}
-          />
-        )}
-
-        {step >= 3 && (
-          <textarea
-            className="border p-2 rounded"
-            placeholder="توضیحات"
-            onChange={() => setStep(4)}
-          />
-        )}
+            {/* Step Info */}
+            <div className="mt-4 pt-4 border-t border-gray-200">
+              <div className="flex justify-between items-center">
+                <span className="text-sm text-gray-600">
+                  مرحله {step + 1} از {TOTAL_STEPS + 1}
+                </span>
+                <button
+                  type="button"
+                  onClick={() => setStep(Math.max(0, step - 1))}
+                  className="text-sm text-blue-600 hover:text-blue-800 disabled:text-gray-400"
+                  disabled={step === 0}
+                >
+                  مرحله قبلی
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
