@@ -1,18 +1,19 @@
 "use client";
 
+import { VerifiedUser } from "@mui/icons-material";
+import ArticleIcon from "@mui/icons-material/Article";
+import DashboardIcon from "@mui/icons-material/Dashboard";
+import SettingsIcon from "@mui/icons-material/Settings";
 import {
   Box,
+  Divider,
   List,
   ListItemButton,
   ListItemIcon,
   ListItemText,
   Typography,
-  Divider,
   useTheme,
 } from "@mui/material";
-import DashboardIcon from "@mui/icons-material/Dashboard";
-import ArticleIcon from "@mui/icons-material/Article";
-import SettingsIcon from "@mui/icons-material/Settings";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -20,6 +21,7 @@ const menuItems = [
   { text: "داشبورد", icon: <DashboardIcon />, href: "/dashboard" },
   { text: "پست‌ها", icon: <ArticleIcon />, href: "/dashboard/posts" },
   { text: "تنظیمات", icon: <SettingsIcon />, href: "/dashboard/settings" },
+  { text: "فرم کارکنان", icon: <VerifiedUser />, href: "/dashboard/userForm" },
 ];
 
 export default function DashboardSidebar() {
@@ -52,7 +54,9 @@ export default function DashboardSidebar() {
         🎛 ACME Panel
       </Typography>
 
-      <Divider sx={{ borderColor: isDark ? "rgba(255,255,255,0.1)" : undefined }} />
+      <Divider
+        sx={{ borderColor: isDark ? "rgba(255,255,255,0.1)" : undefined }}
+      />
 
       <List>
         {menuItems.map((item, idx) => {
