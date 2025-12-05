@@ -25,15 +25,12 @@ export default function HomePage() {
         mb={6}
       >
         <Typography variant="h5" fontWeight="bold">
-          پروژه من
+        اتوپیا
         </Typography>
 
         <Box>
-          <Button component={Link} href="/login" sx={{ mr: 2 }}>
-            ورود
-          </Button>
-          <Button component={Link} href="/register" variant="contained">
-            ثبت نام
+          <Button component={Link} href="/login" variant="contained">
+            ورود / ثبت نام
           </Button>
         </Box>
       </Box>
