@@ -1,6 +1,7 @@
 "use client";
 
-import { useLoginForm } from "@/features/auth/hooks/useLoginForm";
+
+import { useAuthForm } from "@/features/auth/hooks/useAuthForm";
 import fa from "@/locales/fa.json";
 import { RootState } from "@/store";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
@@ -20,7 +21,7 @@ export default function DashboardHeader() {
   const muiTheme = useTheme();
   const { theme, setTheme } = useNextThemes();
   const { user } = useSelector((state: RootState) => state.auth);
-  const { handleLogout, isPending } = useLoginForm();
+  const { handleLogout, isPending } = useAuthForm();
 
   return (
     <Box

@@ -18,11 +18,11 @@ import {
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useLoginForm } from "../hooks/useLoginForm";
+import { useAuthForm } from "../hooks/useAuthForm";
 import { loginSchema } from "../validation/loginSchema";
 
 export default function AuthForm() {
-  const { handleLogin } = useLoginForm();
+  const { handleAuth, showPass, setShowPass } = useAuthForm();
   const {
     register,
     handleSubmit,
@@ -33,12 +33,11 @@ export default function AuthForm() {
   });
 
   const onSubmit = (data: { email: string; password: string }) => {
-    handleLogin(data); // 🔥 مقدار فرم مستقیم ارسال می‌شه
+    handleAuth(data); // 🔥 مقدار فرم مستقیم ارسال می‌شه
   };
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-  const [showPass, setShowPass] = useState(false);
   const [focus, setFocus] = useState<"none" | "email" | "password">("none");
 
   return (

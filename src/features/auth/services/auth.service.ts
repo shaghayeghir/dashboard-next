@@ -25,10 +25,18 @@ export const loginService = async ({ email, password }: LoginPayload) => {
 export const registerService = async (data: LoginPayload) => {
   const res = await fetch("/api/auth/register", {
     method: "POST",
+    headers: { "Content-Type": "application/json" }, 
     body: JSON.stringify(data),
   });
+
+  if (!res.ok) {
+    const error = await res.json();
+    throw new Error(error.message || "Register failed");
+  }
+
   return res.json();
 };
+
 
 // 🔴 Logout Service
 export const logoutService = async () => {
