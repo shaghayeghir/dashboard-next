@@ -1,6 +1,6 @@
 "use client";
 
-import { useAuthInit } from "@/features/auth/login/hooks/useAuthInit";
+import { useAuthInit } from "@/features/auth/hooks/useAuthInit";
 import { Box, useTheme } from "@mui/material";
 import DashboardHeader from "../../features/dashboard/components/DashboardHeader";
 import DashboardSidebar from "../../features/dashboard/components/DashboardSidebar";
@@ -20,7 +20,6 @@ export default function DashboardLayout({
   useEffect(() => {
     setMounted(true);
   }, []);
-
 
   if (!mounted) {
     return <div style={{ visibility: "hidden" }}>{children}</div>;

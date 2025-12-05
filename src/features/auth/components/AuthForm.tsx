@@ -21,8 +21,7 @@ import { useForm } from "react-hook-form";
 import { useLoginForm } from "../hooks/useLoginForm";
 import { loginSchema } from "../validation/loginSchema";
 
-export default function LoginForm() {
-
+export default function AuthForm() {
   const { handleLogin } = useLoginForm();
   const {
     register,
@@ -119,14 +118,6 @@ export default function LoginForm() {
                 ),
               }}
             />
-
-            <Typography
-              variant="body2"
-              color="primary"
-              sx={{ cursor: "pointer", mb: 3, textAlign: "right" }}
-            >
-              {fa.auth.forgotPassword}
-            </Typography>
 
             <Button
               type="submit"

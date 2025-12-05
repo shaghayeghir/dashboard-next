@@ -1,6 +1,6 @@
 "use client";
 
-import { useLoginForm } from "@/features/auth/login/hooks/useLoginForm";
+import { useLoginForm } from "@/features/auth/hooks/useLoginForm";
 import fa from "@/locales/fa.json";
 import { RootState } from "@/store";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
