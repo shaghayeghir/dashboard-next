@@ -6,36 +6,35 @@ export interface LoginPayload {
 }
 
 // 🟢 Login Service
-export const loginService = async ({ email, password }: LoginPayload) => {
+export const loginService = async ({ email, password }: { email: string; password: string }) => {
   const res = await fetch("/api/auth/login", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email, password }),
   });
 
-  if (!res.ok) {
-    const data = await res.json();
-    throw new Error(data.message || "Login failed");
-  }
+  const result = await res.json();
+  if (!res.ok) throw new Error(result.message);
 
-  return res.json(); // { user, token }
+  return result;
 };
 
+
 // 🟡 Register Service 
-export const registerService = async (data: LoginPayload) => {
+export const registerService = async (data: { email: string; password: string }) => {
   const res = await fetch("/api/auth/register", {
     method: "POST",
-    headers: { "Content-Type": "application/json" }, 
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
   });
 
-  if (!res.ok) {
-    const error = await res.json();
-    throw new Error(error.message || "Register failed");
-  }
+  const result = await res.json();
 
-  return res.json();
+  if (!res.ok) throw new Error(result.message);
+
+  return result;
 };
+
 
 
 // 🔴 Logout Service
