@@ -42,7 +42,7 @@ export default function HeroHeaderPath() {
     <div
       style={{
         position: "absolute",
-        top: "5px",
+        top: "15px",
         left: "10%",
         width: "650px",
         height: "150px",
@@ -99,6 +99,7 @@ export default function HeroHeaderPath() {
       <div
         ref={heroRef}
         style={{
+        
           position: "absolute",
           width: 60,
           height: 60,
