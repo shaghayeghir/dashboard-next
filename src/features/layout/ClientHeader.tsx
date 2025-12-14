@@ -1,7 +1,10 @@
+"use client"
 import LogoGlow from "@/assets/logos/general-logo.png";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Box, Button, Container, IconButton, Typography } from "@mui/material";
+import { useClientLayout } from "./ClientLayoutContext";
 export default function ClientHeader() {
+  const { setDrawerOpen } = useClientLayout();
   return (
     <Box
       position="fixed"
@@ -73,7 +76,7 @@ export default function ClientHeader() {
 
           <IconButton
             sx={{ ml: 1 }}
-            //   onClick={() => setOpen(true)}
+              onClick={() => setDrawerOpen(true)}
           >
             <MenuIcon sx={{ fontSize: 26 }} />
           </IconButton>
