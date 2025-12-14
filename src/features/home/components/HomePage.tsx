@@ -1,35 +1,21 @@
 "use client";
 
-import {
-  Box,
-  Button,
-  Container,
-  Drawer,
-  IconButton,
-  Typography,
-} from "@mui/material";
+import { Box, Button, Container, Typography } from "@mui/material";
 import Lottie from "lottie-react";
 import Link from "next/link";
 import { useState } from "react";
 
 import heroAnimation from "@/assets/animations/Meditating-Panda.json";
-import HeroHeaderPath from "@/features/home/components/HeroPath";
 import HomeSlider from "@/features/home/components/HomeSlider";
 import StoryBlock from "@/features/home/components/StoryBlock";
-
-import ClientHeader from "@/features/layout/ClientHeader";
-import HeroPath from "@/features/layout/HeroPath";
-import ClientDrawer from "@/features/layout/ClientDrawer";
 
 export default function HomePage() {
   const [open, setOpen] = useState(false);
 
   return (
     <>
-      {/* ---------------- MAIN BODY ---------------- */}
       <Box sx={{ bgcolor: "#FAECCF", pt: 14, minHeight: "100vh" }}>
         <Container maxWidth="lg">
-          {/* ---------------- HERO SECTION (نسخه جدید) ---------------- */}
           <Box
             display="flex"
             flexDirection={{ xs: "column-reverse", md: "row" }}
@@ -117,12 +103,12 @@ export default function HomePage() {
             {/* Floating animation keyframes */}
             <style>
               {`
-      @keyframes floatHero {
-        0% { transform: translateY(0px); }
-        50% { transform: translateY(-12px); }
-        100% { transform: translateY(0px); }
-      }
-    `}
+                 @keyframes floatHero {
+                 0% { transform: translateY(0px); }
+                50% { transform: translateY(-12px); }
+                100% { transform: translateY(0px); }
+             }
+           `}
             </style>
           </Box>
 
