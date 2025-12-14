@@ -37,8 +37,7 @@ export default function StoryBlock({ index, text }: any) {
             top: 0,
             height: "100%",
             width: "7px",
-            background:
-              "linear-gradient(180deg, #013D25 0%, #06A06A 100%)",
+            background: "linear-gradient(180deg, #013D25 0%, #06A06A 100%)",
             borderRadius: "0 6px 6px 0",
           }}
         />
@@ -71,10 +70,10 @@ export default function StoryBlock({ index, text }: any) {
             boxShadow: "0 4px 12px rgba(1,61,37,0.35)",
           }}
         >
-           {index}
+          مرحله {index}
         </Box>
 
-        {/* 🔥 Title (Small but premium) */}
+        {/* 🔥 Title */}
         <Typography
           sx={{
             color: "#013D25",
@@ -84,9 +83,7 @@ export default function StoryBlock({ index, text }: any) {
             mt: 5,
             fontFamily: "BTitr",
           }}
-        >
-  
-        </Typography>
+        ></Typography>
 
         {/* 🔥 Description */}
         <Typography
