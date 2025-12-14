@@ -1,12 +1,12 @@
 "use client";
 
-import { Box, Typography, Button } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
+import { Autoplay, EffectCoverflow, Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Navigation, EffectCoverflow } from "swiper/modules";
 
 import "swiper/css";
-import "swiper/css/navigation";
 import "swiper/css/effect-coverflow";
+import "swiper/css/navigation";
 
 const slides = [
   {
@@ -35,7 +35,7 @@ const slides = [
   },
 ];
 
-export default function SliderKartopia() {
+export default function HomeSlider() {
   return (
     <Box sx={{ width: "100%", my: 8 }}>
       <Swiper
