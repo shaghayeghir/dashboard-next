@@ -28,8 +28,9 @@ import { registerSchema } from "../validation/registerSchema";
 export default function RegisterForm() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+
   const [showPass, setShowPass] = useState(false);
-  const [focus, setFocus] = useState<"none" | "email" | "password">("none");
+  const [focus, setFocus] = useState<"none" | "email" | "password" >("none");
 
   const { handleRegister } = useRegisterForm();
 
@@ -45,34 +46,47 @@ export default function RegisterForm() {
   const onSubmit = (data: any) => handleRegister(data);
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <MonkeyAnimation state={focus} size={isMobile ? 180 : 260} />
+    <Box
+      sx={{
+        minHeight: "100vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        bgcolor: "#FAECCD",
+        px: 2,
+      }}
+    >
+      <form onSubmit={handleSubmit(onSubmit)}>
+        {/* Animation */}
+        <Box sx={{ display: "flex", justifyContent: "center", mb: 1 }}>
+          <MonkeyAnimation state={focus} size={isMobile ? 160 : 230} />
+        </Box>
 
-      <Box
-        sx={{ display: "flex", justifyContent: "center", p: isMobile ? 2 : 4 }}
-      >
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 25 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.55 }}
         >
           <Paper
+            elevation={6}
             sx={{
               p: isMobile ? 3 : 4,
-              width: isMobile ? "90vw" : 380,
+              width: isMobile ? "92vw" : 380,
               borderRadius: 4,
+              background: "#fff",
+              boxShadow: "0 12px 30px rgba(1,61,37,0.15)",
             }}
-            elevation={4}
           >
             <Typography
               variant={isMobile ? "h6" : "h5"}
               fontWeight="bold"
-              mb={2}
+              mb={3}
+              sx={{ color: "#013D25", fontFamily: "BTitr" }}
             >
               {fa.auth.signup}
             </Typography>
 
-            {/* Email */}
+            {/* EMAIL */}
             <TextField
               {...register("email")}
               fullWidth
@@ -81,20 +95,25 @@ export default function RegisterForm() {
               error={!!errors.email}
               helperText={errors.email?.message}
               onFocus={() => setFocus("email")}
-              sx={{ mb: 2 }}
+              onBlur={() => setFocus("none")}
+              sx={{
+                mb: 2,
+                "& .MuiOutlinedInput-root": {
+                  borderRadius: 2,
+                  bgcolor: "#f9f9f9",
+                },
+              }}
               InputProps={{
                 sx: { direction: "ltr" },
                 startAdornment: (
                   <InputAdornment position="start">
-                    <IconButton>
-                      <Email />
-                    </IconButton>
+                    <Email sx={{ color: "#013D25" }} />
                   </InputAdornment>
                 ),
               }}
             />
 
-            {/* Password */}
+            {/* PASSWORD */}
             <TextField
               {...register("password")}
               fullWidth
@@ -104,7 +123,14 @@ export default function RegisterForm() {
               error={!!errors.password}
               helperText={errors.password?.message}
               onFocus={() => setFocus("password")}
-              sx={{ mb: 2 }}
+              onBlur={() => setFocus("none")}
+              sx={{
+                mb: 2,
+                "& .MuiOutlinedInput-root": {
+                  borderRadius: 2,
+                  bgcolor: "#f9f9f9",
+                },
+              }}
               InputProps={{
                 sx: { direction: "ltr" },
                 startAdornment: (
@@ -117,7 +143,7 @@ export default function RegisterForm() {
               }}
             />
 
-            {/* Confirm Password */}
+            {/* CONFIRM PASSWORD */}
             <TextField
               {...register("confirmPassword")}
               fullWidth
@@ -126,38 +152,65 @@ export default function RegisterForm() {
               placeholder={fa.auth.confirmPassword}
               error={!!errors.confirmPassword}
               helperText={errors.confirmPassword?.message}
-              onFocus={() => setFocus("none")}
-              sx={{ mb: 2 }}
+              onFocus={() => setFocus("password")}
+              onBlur={() => setFocus("none")}
+              sx={{
+                mb: 2,
+                "& .MuiOutlinedInput-root": {
+                  borderRadius: 2,
+                  bgcolor: "#f9f9f9",
+                },
+              }}
               InputProps={{
                 sx: { direction: "ltr" },
                 startAdornment: (
                   <InputAdornment position="start">
-                    <Lock />
+                    <Lock sx={{ color: "#013D25" }} />
                   </InputAdornment>
                 ),
               }}
             />
 
-            {/* Terms */}
+            {/* TERMS */}
             <FormControlLabel
               control={<Checkbox />}
               label={fa.auth.acceptTerms}
-              sx={{ fontSize: "0.8rem", mb: 1 }}
+              sx={{
+                mb: 1,
+                "& .MuiTypography-root": { fontSize: "0.85rem" },
+              }}
             />
 
-            <Button variant="contained" type="submit" fullWidth sx={{ mt: 1 }}>
+            {/* SUBMIT BUTTON */}
+            <Button
+              variant="contained"
+              type="submit"
+              fullWidth
+              sx={{
+                mt: 1,
+                py: 1.1,
+                borderRadius: 2,
+                bgcolor: "#013D25",
+                textTransform: "none",
+                fontSize: "1rem",
+                "&:hover": { bgcolor: "#022E1D" },
+                boxShadow: "0 6px 18px rgba(1,61,37,0.30)",
+              }}
+            >
               {fa.auth.signup}
             </Button>
 
+            {/* DIVIDER */}
             <Divider sx={{ my: 2 }}>{fa.auth.or}</Divider>
 
+            {/* LOGIN LINK */}
             <Typography textAlign="center" fontSize={isMobile ? 13 : 14}>
               {fa.auth.alreadyRegistered}{" "}
-              <Link href="/login" passHref>
+              <Link href="/login">
                 <Typography
                   component="span"
                   sx={{
-                    color: "#3b82f6",
+                    color: "#046844",
                     cursor: "pointer",
                     fontWeight: "bold",
                     "&:hover": { opacity: 0.8 },
@@ -169,7 +222,7 @@ export default function RegisterForm() {
             </Typography>
           </Paper>
         </motion.div>
-      </Box>
-    </form>
+      </form>
+    </Box>
   );
 }
