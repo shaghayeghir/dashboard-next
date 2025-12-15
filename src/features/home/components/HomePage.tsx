@@ -3,36 +3,39 @@
 import { Box, Button, Container, Typography } from "@mui/material";
 import Lottie from "lottie-react";
 import Link from "next/link";
-import { useState } from "react";
-
 import heroAnimation from "@/assets/animations/Meditating-Panda.json";
 import HomeSlider from "@/features/home/components/HomeSlider";
 import StoryBlock from "@/features/home/components/StoryBlock";
 
 export default function HomePage() {
-  const [open, setOpen] = useState(false);
-
   return (
     <>
-      <Box sx={{ bgcolor: "#FAECCF", pt: 14, minHeight: "100vh" }}>
+      <Box sx={{ bgcolor: "#FAECCF", pt: 1, minHeight: "100vh" }}>
         <Container maxWidth="lg">
           <Box
             display="flex"
             flexDirection={{ xs: "column-reverse", md: "row" }}
             alignItems="center"
             justifyContent="space-between"
-            py={{ xs: 6, md: 10 }}
-            gap={{ xs: 4, md: 6 }}
+            py={{ xs: 1, md: 10 }}
+            gap={{ xs: 2, md: 2 }}
             sx={{
               position: "relative",
+              textAlign: { xs: "center" }, // مرکز در موبایل
             }}
           >
             {/* --- LEFT TEXT SECTION --- */}
-            <Box flex={1} sx={{ textAlign: { xs: "center", md: "right" } }}>
+            <Box
+              flex={1}
+              sx={{
+                textAlign: { xs: "center", md: "right" }, // مرکز در موبایل
+              }}
+            >
               <Typography
                 variant="h3"
                 fontWeight="bold"
                 sx={{
+                  textAlign: { xs: "center" },
                   mb: 3,
                   fontFamily: "BTitr",
                   fontSize: { xs: "1.8rem", md: "2.9rem" },
@@ -54,14 +57,20 @@ export default function HomePage() {
                   lineHeight: 1.9,
                   opacity: 0.85,
                   fontFamily: "Vazir",
-                  maxWidth: { xs: "95%", md: "90%" },
-                  mx: { xs: "auto", md: 0 },
+
+                  // مهم‌ترین بخش: وسط چین فقط در موبایل
+                  textAlign: { xs: "center" },
+
+                  // متن محدود اما گردش خوب
+                  maxWidth: { xs: "100%", md: "90%" },
+
+                  // برای مرکز قرار گرفتن در موبایل
+                  mx: { xs: "auto" },
                 }}
               >
                 کارتــوپیا اینجاست تا مثل یه راهنمای واقعی، مسیر کاری‌تو روشن
                 کنه، بهترین فرصت‌ها رو نشونت بده و همراهت باشه تا بدرخشی.
               </Typography>
-
               <Button
                 component={Link}
                 href="/jobs"
@@ -76,6 +85,10 @@ export default function HomePage() {
                   fontSize: "1.05rem",
                   boxShadow: "0 8px 25px rgba(1, 61, 37, 0.25)",
                   transition: "0.25s",
+
+                  mx: { xs: "auto", md: 0 }, // دکمه وسط چین موبایل
+                  display: { xs: "block", md: "inline-block" },
+
                   "&:hover": {
                     bgcolor: "#022e1d",
                     transform: "translateY(-3px)",

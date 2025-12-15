@@ -70,7 +70,7 @@ export default function StoryBlock({ index, text }: any) {
             boxShadow: "0 4px 12px rgba(1,61,37,0.35)",
           }}
         >
-          مرحله {index}
+           {index}
         </Box>
 
         {/* 🔥 Title */}
