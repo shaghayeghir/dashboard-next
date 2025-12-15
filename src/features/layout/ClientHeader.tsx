@@ -1,5 +1,6 @@
-"use client"
+"use client";
 import LogoGlow from "@/assets/logos/general-logo.png";
+import fa from "@/locales/fa.json";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Box, Button, Container, IconButton, Typography } from "@mui/material";
 import { useClientLayout } from "./ClientLayoutContext";
@@ -50,16 +51,16 @@ export default function ClientHeader() {
               color: "#013d25",
               fontFamily: "BTitr",
               lineHeight: 1,
-              display: { xs: "none", md: "flex" }, // ← این باعث مخفی شدن در موبایل می‌شود
+              display: { xs: "none", md: "flex" },
             }}
           >
-            KARTOPIA
+            {fa.home.header.logo}
           </Typography>
         </Box>
 
         <Box display="flex" alignItems="center">
           <Button href="/login" sx={{ mr: 2 }}>
-            ورود
+            {fa.home.header.signin}
           </Button>
 
           <Button
@@ -71,13 +72,10 @@ export default function ClientHeader() {
               backdropFilter: "blur(6px)",
             }}
           >
-            ثبت‌نام
+            {fa.home.header.signup}
           </Button>
 
-          <IconButton
-            sx={{ ml: 1 }}
-              onClick={() => setDrawerOpen(true)}
-          >
+          <IconButton sx={{ ml: 1 }} onClick={() => setDrawerOpen(true)}>
             <MenuIcon sx={{ fontSize: 26 }} />
           </IconButton>
         </Box>

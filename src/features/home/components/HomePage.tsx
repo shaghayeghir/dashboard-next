@@ -1,11 +1,12 @@
 "use client";
 
-import { Box, Button, Container, Typography } from "@mui/material";
-import Lottie from "lottie-react";
-import Link from "next/link";
 import heroAnimation from "@/assets/animations/Meditating-Panda.json";
 import HomeSlider from "@/features/home/components/HomeSlider";
 import StoryBlock from "@/features/home/components/StoryBlock";
+import fa from "@/locales/fa.json";
+import { Box, Button, Container, Typography } from "@mui/material";
+import Lottie from "lottie-react";
+import Link from "next/link";
 
 export default function HomePage() {
   return (
@@ -21,14 +22,14 @@ export default function HomePage() {
             gap={{ xs: 2, md: 2 }}
             sx={{
               position: "relative",
-              textAlign: { xs: "center" }, // مرکز در موبایل
+              textAlign: { xs: "center" },
             }}
           >
             {/* --- LEFT TEXT SECTION --- */}
             <Box
               flex={1}
               sx={{
-                textAlign: { xs: "center", md: "right" }, // مرکز در موبایل
+                textAlign: { xs: "center", md: "right" },
               }}
             >
               <Typography
@@ -46,7 +47,7 @@ export default function HomePage() {
                   textShadow: "0 0 18px rgba(1, 61, 37, 0.15)",
                 }}
               >
-                به شهر فرصت‌ها خوش اومدی ✨
+                {fa.home.hero.title}
               </Typography>
 
               <Typography
@@ -68,8 +69,7 @@ export default function HomePage() {
                   mx: { xs: "auto" },
                 }}
               >
-                کارتــوپیا اینجاست تا مثل یه راهنمای واقعی، مسیر کاری‌تو روشن
-                کنه، بهترین فرصت‌ها رو نشونت بده و همراهت باشه تا بدرخشی.
+                {fa.home.hero.subtitle}
               </Typography>
               <Button
                 component={Link}
@@ -95,7 +95,7 @@ export default function HomePage() {
                   },
                 }}
               >
-                شروع سفر کاری
+                {fa.home.hero.button}
               </Button>
             </Box>
 
@@ -128,7 +128,7 @@ export default function HomePage() {
           {/* ---------------- SLIDER کارت‌اوپیا ---------------- */}
           <HomeSlider />
 
-          {/* ---------------- STORYTELLING واقعی (۶ مرحله) ---------------- */}
+          {/* ---------------- STORYTELLING (۶ مرحله) ---------------- */}
           <Box py={12}>
             <Typography
               variant="h4"
@@ -137,17 +137,10 @@ export default function HomePage() {
               mb={8}
               sx={{ color: "#013d25" }}
             >
-              داستان سفر کارتــوپیا
+              {fa.home.storyTitle}
             </Typography>
 
-            {[
-              "در دل شهر شلوغ و بی‌قرار، جایی که رستوران‌ها دنبال نیرو بودن و نیروها دنبال جای درست… هیچ‌کس مسیر واقعی خودش را پیدا نمی‌کرد.",
-              "تا اینکه روزی نسیمی تازه وزید؛ از دل همین آشفتگی، کارتوپیا متولد شد — نه فقط یک پلتفرم استخدام، بلکه یک قهرمان خاموش.",
-              "قهرمانی که میان آدم‌ها قدم می‌زد، استعدادها را می‌دید، و می‌دانست هر انسان باید جایی باشد که بدرخشد.",
-              "او شبانه‌روز در کافه‌ها و رستوران‌ها می‌چرخید، دست روی شانه نیروهای خسته می‌گذاشت و آن‌ها را به جای درستشان می‌رساند.",
-              "به رستوراندارها کمک می‌کرد تیمی بسازند که مثل یک ارکستر هماهنگ باشد — هرکس در جای خودش، هرکس با ریتم خودش.",
-              "و این‌گونه، شهر آرام‌آرام تغییر کرد… تیم‌ها کامل شدند، استعدادها دیده شدند و هرکس سهم واقعی‌اش از بازار کار را پیدا کرد.",
-            ].map((t, i) => (
+            {fa.home.story.map((t, i) => (
               <StoryBlock key={i} index={i + 1} text={t} />
             ))}
           </Box>

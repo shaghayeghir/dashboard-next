@@ -3,31 +3,28 @@
 import { Box, Button, Typography } from "@mui/material";
 import { Autoplay, EffectCoverflow, Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-
+import fa from "@/locales/fa.json";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/navigation";
 
 const slides = [
   {
-    title: "تیمت رو با کارتوپیا تکمیل کن",
-    desc: "استخدام بهترین نیروها بر اساس نیاز شما",
+    i: 0,
     link: "/employer",
     theme: "employer",
     colors: ["#FAECCD", "#F3B99B"],
     img: "/slider/employer.png",
   },
   {
-    title: "کار از ما، تو فقط بیا",
-    desc: "جات تو بهترین تیم‌ها خالیه",
+    i: 1,
     link: "/jobseeker",
     theme: "hero",
     colors: ["#013D25", "#046844"],
     img: "/slider/jobseeker.png",
   },
   {
-    title: "کارتوپیا یعنی اتصال استعدادها",
-    desc: "اینجا مسیرها و آدم‌ها به هم وصل می‌شن",
+    i: 2,
     link: "/about",
     theme: "about",
     colors: ["#013D25", "#FAECCD"],
@@ -123,7 +120,7 @@ export default function HomeSlider() {
                     fontFamily: "BTitr",
                   }}
                 >
-                  {item.title}
+                  {fa.home.slider[item.i].title}
                 </Typography>
 
                 <Typography
@@ -140,7 +137,7 @@ export default function HomeSlider() {
                     fontFamily: "Vazir",
                   }}
                 >
-                  {item.desc}
+                  {fa.home.slider[item.i].desc}
                 </Typography>
 
                 <Button
@@ -168,7 +165,7 @@ export default function HomeSlider() {
                     },
                   }}
                 >
-                  مشاهده بیشتر
+                  {fa.home.slider[item.i].button}
                 </Button>
               </Box>
             </Box>

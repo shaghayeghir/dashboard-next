@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import Link from "next/link";
 import { useClientLayout } from "./ClientLayoutContext";
-
+import fa from "@/locales/fa.json";
 export default function DrawerMenu() {
   const { setDrawerOpen, drawerOpen } = useClientLayout();
 
@@ -41,7 +41,7 @@ export default function DrawerMenu() {
         <Typography
           sx={{ fontSize: "1.1rem", fontWeight: "bold", color: "#013D25" }}
         >
-          منوی کارتــوپیا
+          {fa.home.drawer.title}
         </Typography>
 
         <IconButton
@@ -59,17 +59,13 @@ export default function DrawerMenu() {
 
       {/* MENU ITEMS */}
       <Box sx={{ display: "flex", flexDirection: "column", gap: 1.5 }}>
-        {[
-          { label: "خدمات کارفرما", link: "/employer" },
-          { label: "خدمات کارجو", link: "/jobseeker" },
-          { label: "آموزش", link: "/training" },
-          { label: "درباره کارتوپیا", link: "/about" },
-          { label: "ارتباط", link: "/contact" },
-        ].map((item, i) => (
+        {fa.home.drawer.items.map((label, i) => (
           <Button
             key={i}
             component={Link}
-            href={item.link}
+            href={
+              ["/employer", "/jobseeker", "/training", "/about", "/contact"][i]
+            }
             onClick={() => setDrawerOpen(false)}
             sx={{
               justifyContent: "flex-start",
@@ -89,7 +85,7 @@ export default function DrawerMenu() {
               transition: "0.25s ease",
             }}
           >
-            {item.label}
+            {label}
           </Button>
         ))}
       </Box>
