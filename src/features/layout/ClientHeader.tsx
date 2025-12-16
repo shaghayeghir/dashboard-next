@@ -14,6 +14,7 @@ export default function ClientHeader() {
       right={0}
       zIndex={10}
       sx={{
+            mx:4,
         background: "transparent",
         backdropFilter: "blur(14px)",
         WebkitBackdropFilter: "blur(14px)",
@@ -21,17 +22,19 @@ export default function ClientHeader() {
       }}
     >
       <Container
-        maxWidth="lg"
+        maxWidth={false}
+        disableGutters
         sx={{
+      
           py: 1.5,
           display: "flex",
           justifyContent: "space-between",
-          alignItems: "center",
+          alignItems: "start",
         }}
       >
         <Box display="flex" alignItems="center" gap={1.5}>
           {/* لوگو */}
-          <Box
+          {/* <Box
             component="img"
             src={LogoGlow.src}
             alt="Kartopia Logo"
@@ -41,21 +44,10 @@ export default function ClientHeader() {
               objectFit: "contain",
               filter: "drop-shadow(0 0 6px rgba(255,185,155,0.6))",
             }}
-          />
-
-          {/* تایپوگرافی - فقط در سایز md به بالا */}
-          <Typography
-            variant="h5"
-            fontWeight="bold"
-            sx={{
-              color: "#013d25",
-              fontFamily: "BTitr",
-              lineHeight: 1,
-              display: { xs: "none", md: "flex" },
-            }}
-          >
-            {fa.home.header.logo}
-          </Typography>
+          /> */}
+          <IconButton sx={{ ml: 1 }} onClick={() => setDrawerOpen(true)}>
+            <MenuIcon sx={{ fontSize: 26 }} />
+          </IconButton>
         </Box>
 
         <Box display="flex" alignItems="center">
@@ -74,10 +66,6 @@ export default function ClientHeader() {
           >
             {fa.home.header.signup}
           </Button>
-
-          <IconButton sx={{ ml: 1 }} onClick={() => setDrawerOpen(true)}>
-            <MenuIcon sx={{ fontSize: 26 }} />
-          </IconButton>
         </Box>
       </Container>
     </Box>

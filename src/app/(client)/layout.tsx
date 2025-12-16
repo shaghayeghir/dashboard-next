@@ -11,7 +11,7 @@ export default function ClientLayout({
 }) {
   return (
     <ClientLayoutProvider>
-      <Box sx={{ bgcolor: "#FAECCF", pt: 14, minHeight: "100vh" }}>
+      <Box sx={{ bgcolor: "#FAECCF", pt: 8, minHeight: "100vh" }}>
         {/* هدر + هیروپث + دراور */}
         <HeroPath />
         <ClientHeader />

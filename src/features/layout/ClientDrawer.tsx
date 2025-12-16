@@ -16,7 +16,7 @@ export default function DrawerMenu() {
 
   return (
     <Drawer
-      anchor="right"
+      anchor="left"
       open={drawerOpen}
       onClose={() => setDrawerOpen(false)}
       PaperProps={{
