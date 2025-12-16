@@ -1,12 +1,9 @@
 "use client";
 
-import heroAnimation from "@/assets/animations/Meditating-Panda.json";
 import HomeSlider from "@/features/home/components/HomeSlider";
 import StoryBlock from "@/features/home/components/StoryBlock";
 import fa from "@/locales/fa.json";
-import { Box, Button, Container, Typography } from "@mui/material";
-import Lottie from "lottie-react";
-import Link from "next/link";
+import { Box, Container, Typography } from "@mui/material";
 
 export default function HomePage() {
   return (
@@ -15,7 +12,6 @@ export default function HomePage() {
         <Container maxWidth="lg">
           {/* ---------------- SLIDER کارت‌اوپیا ---------------- */}
           <HomeSlider />
-
           {/* ---------------- STORYTELLING (۶ مرحله) ---------------- */}
           <Box py={12}>
             <Typography
