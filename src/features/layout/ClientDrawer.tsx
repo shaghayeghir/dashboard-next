@@ -64,7 +64,7 @@ export default function DrawerMenu() {
             key={i}
             component={Link}
             href={
-              ["/employer", "/jobseeker", "/training", "/about", "/contact"][i]
+              ["/services", "/training", "/about", "/contact"][i]
             }
             onClick={() => setDrawerOpen(false)}
             sx={{
