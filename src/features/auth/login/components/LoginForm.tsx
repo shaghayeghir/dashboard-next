@@ -22,7 +22,6 @@ import { useLoginForm } from "../hooks/useLoginForm";
 import { loginSchema } from "../validation/loginSchema";
 
 export default function LoginForm() {
-
   const { handleLogin } = useLoginForm();
   const {
     register,
@@ -34,7 +33,7 @@ export default function LoginForm() {
   });
 
   const onSubmit = (data: { email: string; password: string }) => {
-    handleLogin(data); // 🔥 مقدار فرم مستقیم ارسال می‌شه
+    handleLogin(data);
   };
 
   const theme = useTheme();
@@ -43,71 +42,95 @@ export default function LoginForm() {
   const [focus, setFocus] = useState<"none" | "email" | "password">("none");
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <MonkeyAnimation state={focus} size={isMobile ? 180 : 260} />
+    <Box
+      sx={{
+        minHeight: "100vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        bgcolor: "#FAECCD",
+        px: 2,
+      }}
+    >
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <Box sx={{ display: "flex", justifyContent: "center", mb: 1 }}>
+          <MonkeyAnimation state={focus} size={isMobile ? 160 : 230} />
+        </Box>
 
-      <Box
-        sx={{ display: "flex", justifyContent: "center", p: isMobile ? 2 : 4 }}
-      >
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 25 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.55 }}
         >
           <Paper
+            elevation={6}
             sx={{
               p: isMobile ? 3 : 4,
-              width: isMobile ? "90vw" : 380,
+              width: isMobile ? "92vw" : 380,
               borderRadius: 4,
+              background: "#fff",
+              boxShadow: "0 12px 30px rgba(1,61,37,0.15)",
             }}
-            elevation={4}
           >
             <Typography
               variant={isMobile ? "h6" : "h5"}
               fontWeight="bold"
-              mb={2}
+              mb={3}
+              sx={{ color: "#013D25", fontFamily: "BTitr" }}
             >
               {fa.auth.login}
             </Typography>
 
-            {/* ایمیل */}
+            {/* EMAIL */}
             <TextField
               {...register("email")}
               fullWidth
               size="small"
+              placeholder={fa.auth.email}
               error={!!errors.email}
               helperText={errors.email?.message}
-              placeholder={fa.auth.email}
               onFocus={() => setFocus("email")}
               onBlur={() => setFocus("none")}
-              sx={{ mb: 2 }}
+              sx={{
+                mb: 2,
+                "& .MuiOutlinedInput-root": {
+                  borderRadius: 2,
+                  bgcolor: "#f9f9f9",
+                },
+              }}
               InputProps={{
                 sx: { direction: "ltr", textAlign: "left" },
                 startAdornment: (
                   <InputAdornment position="start">
-                    <Email />
+                    <Email sx={{ color: "#013D25" }} />
                   </InputAdornment>
                 ),
               }}
             />
 
-            {/* رمز عبور */}
+            {/* PASSWORD */}
             <TextField
               {...register("password")}
               fullWidth
               size="small"
               type={showPass ? "text" : "password"}
+              placeholder={fa.auth.password}
               error={!!errors.password}
               helperText={errors.password?.message}
-              placeholder={fa.auth.password}
               onFocus={() => setFocus("password")}
               onBlur={() => setFocus("none")}
-              sx={{ mb: 2 }}
+              sx={{
+                mb: 1,
+                "& .MuiOutlinedInput-root": {
+                  borderRadius: 2,
+                  bgcolor: "#f9f9f9",
+                },
+              }}
               InputProps={{
                 sx: { direction: "ltr", textAlign: "left" },
                 startAdornment: (
                   <InputAdornment position="start">
-                    <Lock />
+                    <Lock sx={{ color: "#013D25" }} />
                   </InputAdornment>
                 ),
                 endAdornment: (
@@ -120,25 +143,40 @@ export default function LoginForm() {
               }}
             />
 
+            {/* FORGOT PASSWORD */}
             <Typography
               variant="body2"
-              color="primary"
-              sx={{ cursor: "pointer", mb: 3, textAlign: "right" }}
+              sx={{
+                textAlign: "right",
+                mb: 3,
+                cursor: "pointer",
+                color: "#046844",
+                fontWeight: 500,
+              }}
             >
               {fa.auth.forgotPassword}
             </Typography>
 
+            {/* SUBMIT BUTTON */}
             <Button
               type="submit"
               variant="contained"
               fullWidth
-              sx={{ py: 1.1, borderRadius: 2, textTransform: "none", mb: 3 }}
+              sx={{
+                py: 1.2,
+                borderRadius: 2,
+                textTransform: "none",
+                fontSize: "1rem",
+                bgcolor: "#013D25",
+                "&:hover": { bgcolor: "#022E1D" },
+                boxShadow: "0 6px 18px rgba(1,61,37,0.30)",
+              }}
             >
               {fa.auth.login}
             </Button>
           </Paper>
         </motion.div>
-      </Box>
-    </form>
+      </form>
+    </Box>
   );
 }
