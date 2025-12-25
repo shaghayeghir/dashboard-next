@@ -1,7 +1,7 @@
 import ClientDrawer from "@/features/layout/ClientDrawer";
+import ClientFooter from "@/features/layout/ClientFooter";
 import ClientHeader from "@/features/layout/ClientHeader";
 import { ClientLayoutProvider } from "@/features/layout/ClientLayoutContext";
-import HeroPath from "@/features/layout/HeroPath";
 import { Box } from "@mui/material";
 
 export default function ClientLayout({
@@ -12,13 +12,12 @@ export default function ClientLayout({
   return (
     <ClientLayoutProvider>
       <Box sx={{ bgcolor: "#FAECCF", pt: 8, minHeight: "100vh" }}>
-        {/* هدر + هیروپث + دراور */}
-        <HeroPath />
         <ClientHeader />
         <ClientDrawer />
 
-        {/* محتوای صفحات */}
         <main style={{ paddingTop: "80px" }}>{children}</main>
+
+        <ClientFooter />
       </Box>
     </ClientLayoutProvider>
   );
